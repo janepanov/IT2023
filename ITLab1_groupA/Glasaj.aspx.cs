@@ -21,6 +21,9 @@ namespace ITLab1
 
         protected void subjects_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+	    credits.SelectedIndex = subjects.SelectedIndex;
+
             if(subjects.SelectedItem.Value == "IT")
             {
                 professor.Text = "д-р Гоце Арменски";
