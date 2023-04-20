@@ -1,0 +1,16 @@
+﻿@model ITLab2_groupA.Models.EventModel
+@{
+    ViewBag.Title = "DeleteEvent";
+}
+
+@using (Html.BeginForm("DeleteEvent", "Event", FormMethod.Post))
+{
+    <h2>Delete event</h2>
+    <br />
+    <h5>Are you sure you want to delete the selected event?</h5>
+    <p style="color: red;">Selected event: @Model.Name</p>
+    <br />
+    <button type="submit">Yes</button>
+    @Html.ActionLink("Cancel", "ShowEvents");
+}
+

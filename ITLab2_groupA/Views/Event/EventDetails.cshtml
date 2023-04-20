@@ -1,0 +1,15 @@
+﻿@model ITLab2_groupA.Models.EventModel
+@{
+    ViewBag.Title = "EventDetails";
+}
+
+<h2>Event details</h2>
+
+<h3>Event name: @Model.Name</h3>
+<h5>Event ID: @Model.Id</h5>
+<h5>Event Location: @Model.Location</h5>
+
+@Html.ActionLink("Back", "ShowEvents")
+
+
+

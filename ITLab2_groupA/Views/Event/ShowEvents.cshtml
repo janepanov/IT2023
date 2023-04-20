@@ -1,0 +1,31 @@
+﻿@model List<ITLab2_groupA.Models.EventModel>
+
+@{
+    ViewBag.Title = "ShowEvents";
+}
+
+<h2>Events: </h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Location</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var e in Model)
+            {
+                <tr>
+                    <td>@e.Id</td>
+                    <td>@e.Name</td>
+                    <td>@e.Location</td>
+                    <td>@Html.ActionLink("Edit", "EditEvent", new {id = e.Id})</td>
+                    <td>@Html.ActionLink("Delete", "DeleteEvent", new { id = e.Id })</td>
+                </tr>
+            }
+    </tbody>
+</table>
+

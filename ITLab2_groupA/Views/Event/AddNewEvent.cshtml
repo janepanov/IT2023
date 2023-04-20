@@ -1,0 +1,34 @@
+﻿@model ITLab2_groupA.Models.EventModel
+@{
+    ViewBag.Title = "AddNewEvent";
+}
+
+<h2>Add new event</h2>
+
+@using(Html.BeginForm("AddNewEvent", "Event"))
+{
+    <div>
+        <div>
+            @Html.Label("Event ID")
+            @Html.TextBoxFor(model => model.Id)
+        </div>
+        <br />
+
+        <div>
+            @Html.Label("Event name")
+            @Html.TextBoxFor(model => model.Name)
+        </div>
+        <br />
+
+        <div>
+            @Html.Label("Event location")
+            @Html.TextBoxFor(model => model.Location)
+        </div>
+        <br />
+
+        <button type="submit">Add event</button>
+    </div>
+}
+
+
+
