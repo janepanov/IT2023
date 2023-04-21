@@ -10,11 +10,12 @@ namespace ITLab2_groupA.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "The event name is required!")]
+        [Required(ErrorMessage = "The event's name is required!")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "The event location is required!")]
+        [Required(ErrorMessage = "The event's location is required!")]
         public string Location { get; set; }
+
         public static List<EventModel> Events { get; set; } = new List<EventModel>();
     }
 }

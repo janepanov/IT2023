@@ -3,14 +3,36 @@
     ViewBag.Title = "DeleteEvent";
 }
 
+<style>
+    #container {
+        margin-top: 2%;
+        margin-bottom: 2%;
+        font-size: 32px;
+    }
+
+    #buttons{
+        font-size: 32px;
+    }
+
+    #buttons button{
+        margin-right: 2%
+    }
+</style>
+
 @using (Html.BeginForm("DeleteEvent", "Event", FormMethod.Post))
 {
-    <h2>Delete event</h2>
+    <h1>Delete event</h1>
     <br />
-    <h5>Are you sure you want to delete the selected event?</h5>
-    <p style="color: red;">Selected event: @Model.Name</p>
+
+    <div id="container">
+        <h5>Are you sure you want to delete the selected event?</h5>
+        <p style="color: red;">Selected event: @Model.Name</p>
+    </div>
     <br />
-    <button type="submit">Yes</button>
-    @Html.ActionLink("Cancel", "ShowEvents");
+
+    <div id="buttons">
+        <button type="submit">Yes</button>
+        @Html.ActionLink("Cancel", "ShowEvents")
+    </div>
 }
 

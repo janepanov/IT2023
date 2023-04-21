@@ -4,14 +4,60 @@
     ViewBag.Title = "ShowEvents";
 }
 
-<h2>Events: </h2>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ccc;
+    }
+
+    #tableHeading{
+        text-align: center;
+    }
+
+    td, th {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    td:hover {
+        background-color: #e6f7ff;
+    }
+
+    .actionLinks{
+        width: 10%;
+        text-align: center;
+    }
+
+    #addEvent{
+       text-align: center;
+       font-size: 32px;
+       font-weight: bold;
+    }
+
+    #title{
+        text-align: center;
+    }
+</style>
+
+<h2 id="title">Events: </h2>
+
+<div id="addEvent">
+    @Html.ActionLink("Add event", "AddNewEvent")
+</div>
 
 <table>
     <thead>
-        <tr>
+        <tr id="tableHeading">
             <td>ID</td>
             <td>Name</td>
             <td>Location</td>
+            <td colspan="2">Actions</td>
         </tr>
     </thead>
 
@@ -22,8 +68,8 @@
                     <td>@e.Id</td>
                     <td>@e.Name</td>
                     <td>@e.Location</td>
-                    <td>@Html.ActionLink("Edit", "EditEvent", new {id = e.Id})</td>
-                    <td>@Html.ActionLink("Delete", "DeleteEvent", new { id = e.Id })</td>
+                    <td class="actionLinks">@Html.ActionLink("Edit", "EditEvent", new {id = e.Id})</td>
+                    <td class="actionLinks">@Html.ActionLink("Delete", "DeleteEvent", new { id = e.Id })</td>
                 </tr>
             }
     </tbody>

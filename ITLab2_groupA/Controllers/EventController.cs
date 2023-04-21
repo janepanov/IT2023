@@ -21,7 +21,6 @@ namespace ITLab2_groupA.Controllers
             return View(events);
         }
 
-        
         public ActionResult AddNewEvent(EventModel newEvent)
         {
             if (ModelState.IsValid)
@@ -99,6 +98,12 @@ namespace ITLab2_groupA.Controllers
             }
 
             events.RemoveAt(index);
+
+            for(int i = 0; i < events.Count; i++)
+            {
+                events[i].Id = i + 1;
+            }
+
             return RedirectToAction("ShowEvents");
         }
     }
