@@ -14,6 +14,8 @@ namespace ITLab2_groupA.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "The event's location is required!")]
+        // Updated model for group B
+        [StringLength(30, MinimumLength = 5)]
         public string Location { get; set; }
 
         public static List<EventModel> Events { get; set; } = new List<EventModel>();
