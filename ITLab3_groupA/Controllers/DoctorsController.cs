@@ -118,25 +118,7 @@ namespace ITLab3_groupA.Controllers
             return View(doctor);
         }
 
-        // GET: Doctors/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Doctor doctor = db.Doctors.Find(id);
-            if (doctor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(doctor);
-        }
-
-        // POST: Doctors/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             Doctor doctor = db.Doctors.Find(id);
             db.Doctors.Remove(doctor);
