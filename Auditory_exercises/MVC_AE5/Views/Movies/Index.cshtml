@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MVC_AE3_EF.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="tableMovies">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DownloadURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageURL)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DownloadURL)
+                </td>
+                <td>
+                    <img src="@item.ImageURL" style="max-width: 100px;" />
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {id = item.MovieId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MovieId }) |
+                    @if(User.IsInRole("Admin")){
+                        <button movieToDelete="@item.MovieId" class="btn btn-link selectedMovie">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var table = $("#tableMovies").DataTable();
+            $("#tableMovies .selectedMovie").on("click", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to delete the selected movie?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Movies/Delete/" + button.attr("movieToDelete"),
+                            method: "GET",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+}
