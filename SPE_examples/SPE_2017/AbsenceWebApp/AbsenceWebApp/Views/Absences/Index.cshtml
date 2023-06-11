@@ -1,0 +1,95 @@
+﻿@model IEnumerable<AbsenceWebApp.Models.Absence>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.employee.ImageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employee.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employee.Surname)
+        </th>
+        <th>
+            CRUD
+        </th>
+        <th>
+            @{
+                if (User.IsInRole("Director"))
+                {
+                    @Html.DisplayNameFor(model => model.isApproved)
+                }
+            }
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <img src="@item.employee.ImageUrl" style="max-width: 50px"/>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.employee.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.employee.Surname)
+    </td>
+    <td>
+        @{
+            if (User.IsInRole("Employee"))
+            {
+                @Html.ActionLink("Details", "Details", new { id = item.Id });
+            }
+            else if (User.IsInRole("Director") || User.IsInRole("Admin"))
+            {
+
+                @Html.ActionLink("Edit | ", "Edit", new { id = item.Id }); 
+                @Html.ActionLink("Details | ", "Details", new { id = item.Id });  
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id });
+            }
+        }
+    </td>
+    <td>
+        @{               
+            if (User.IsInRole("Director"))
+            {
+                    if (item.isApproved == false)
+                    {
+                        <button id="approveButton_@item.Id" onclick="approve(@item.Id)">Approve</button>
+                    }
+            }
+        }
+    </td>
+</tr>
+}
+
+</table>
+@section scripts
+{
+    <script>
+        function approve(id) {
+            // Disable the button
+            var button = document.getElementById("approveButton_" + id);
+            button.disabled = true;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/Absences/Approve?id=" + id, true);
+            xhr.send();
+        }
+    </script>
+}
