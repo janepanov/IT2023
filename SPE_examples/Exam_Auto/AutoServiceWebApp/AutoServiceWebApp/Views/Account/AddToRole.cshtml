@@ -1,0 +1,18 @@
+﻿@model AutoServiceWebApp.Models.AddToRoleModel
+@{
+    ViewBag.Title = "AddToRole";
+}
+
+<h2>Add to Role</h2>
+
+@using (Html.BeginForm("AddToRole", "Account")) { 
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class="form-control"})
+    </div>
+
+    <div class="form-group">
+        @Html.DropDownListFor(m => m.SelectedRole, new SelectList(Model.roles), new { @class="form-control"})
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}

@@ -1,0 +1,16 @@
+﻿@model AutoServiceWebApp.Models.CarAutoService
+@{
+    ViewBag.Title = "AddCar";
+}
+
+<h2>Add Car to @Model.service.Name</h2>
+@using (Html.BeginForm("AddCar", "AutoServices", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.CarId, new SelectList(Model.cars,"Id","Model"), new { @class="form-control"})
+        @Html.HiddenFor(model => model.AutoServiceId)
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+}
